@@ -1,0 +1,46 @@
+/* ========================================================================== */
+/* ARQUIVO CSS CUSTOMIZADO (public/css/style.css): Estilo Moderno e Limpo     */
+/* ========================================================================== */
+
+/* Estilo base global aplicado a todo o corpo da página */
+body {
+    /* Utiliza as fontes nativas, limpas e modernas do sistema operacional do aluno */
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+/* Configura a janela escura <pre> que simula um terminal de código para a resposta da API */
+.json-viewer {
+    /* Utiliza fonte monoespaçada nativa (igual ao VS Code) para que o JSON fique alinhado perfeitamente */
+    font-family: "Courier New", Courier, monospace;
+    /* Define um tamanho de letra confortável para a leitura técnica */
+    font-size: 0.9rem;
+    /* Define uma altura mínima para evitar que o painel colapse ou fique feio quando vazio */
+    min-height: 160px;
+    /* Define limite máximo de altura. Se o pacote JSON for gigante, não explodirá a tela */
+    max-height: 380px;
+    /* Ativa automaticamente a barra de rolagem vertical apenas se o conteúdo passar do max-height */
+    overflow-y: auto;
+    /* Aplica transição animada de cor. Se a API devolver erro, o painel piscará em vermelho suavemente */
+    transition: background-color 0.3s ease, color 0.3s ease;
+    /* Regra importantíssima: Quebra linhas longas automaticamente para não gerar rolagem horizontal chata */
+    white-space: pre-wrap;
+}
+
+/* Modificação no padrão do Bootstrap para as abas ativas */
+.nav-tabs .nav-link.active {
+    /* Oculta a linha inferior da aba ativa, criando um efeito visual de que ela faz parte do cartão abaixo */
+    border-bottom-color: transparent !important;
+    /* Pinta o fundo da aba de branco, mesclando com o cartão de formulário */
+    background-color: #ffffff;
+}
+
+/* Adiciona um respiro visual (letter-spacing) aos títulos dos cartões */
+.card-header {
+    letter-spacing: 0.5px;
+}
+
+/* Utilitário auxiliar: remove a borda arredondada superior dos cartões vinculados a abas (encaixe perfeito) */
+.border-top-0 {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}

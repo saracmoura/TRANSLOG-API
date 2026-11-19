@@ -1,0 +1,301 @@
+<!-- ========================================================================== -->
+<!-- ARQUIVO HTML SEMÂNTICO (public/index.html): Interface SPA (Single Page)    -->
+<!-- ========================================================================== -->
+
+<!-- Declara o tipo de documento como HTML5, o padrão moderno da web -->
+<!DOCTYPE html>
+<!-- Abre a tag raiz HTML e define o idioma principal como Português do Brasil -->
+<html lang="pt-BR">
+<!-- Abre o cabeçalho técnico da página (metadados e links externos) -->
+<head>
+    <!-- Define a tabela de caracteres UTF-8 para garantir a exibição correta de acentos e cedilha -->
+    <meta charset="UTF-8">
+    <!-- Configura a escala da página para que ela seja responsiva em celulares e monitores grandes -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Define o título oficial do sistema que aparecerá na aba do navegador -->
+    <title>LojaTech - Controle de Estoque (MySQL)</title>
+    <!-- Importa a folha de estilos do framework Bootstrap 5 diretamente do servidor CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Importa a nossa folha de estilos local, separada fisicamente para manter a organização -->
+    <link rel="stylesheet" href="/css/style.css">
+<!-- Fecha o cabeçalho técnico -->
+</head>
+<!-- Abre o corpo visível da página, aplicando fundo claro e Flexbox para organizar o layout -->
+<body class="bg-light d-flex flex-column min-vh-100">
+
+    <!-- Tag semântica HEADER: Agrupa o título principal e a barra de navegação superior -->
+    <header class="bg-dark text-white py-4 shadow-sm mb-4">
+        <!-- Divisão centralizadora do Bootstrap (container) -->
+        <div class="container">
+            <!-- Tag H1 semântica para o título principal da aplicação -->
+            <h1 class="h4 fw-bold mb-2">💻 LojaTech - API Integrada ao MySQL (db_lojatech)</h1>
+            <!-- Parágrafo de instruções gerais para o usuário/aluno -->
+            <p class="text-white-50 mb-3">Painel de testes Front-End. Todos os verbos HTTP consomem a tabela tb_produtos.</p>
+            
+            <!-- Tag semântica NAV: Engloba os links/botões de navegação da página -->
+            <nav>
+                <!-- Lista não ordenada formatada como abas (Tabs) pelo Bootstrap -->
+                <ul class="nav nav-tabs border-bottom-0" role="tablist">
+                    <!-- Item da lista referente ao método GET -->
+                    <li class="nav-item" role="presentation">
+                        <!-- Botão que ativa a seção GET na tela -->
+                        <button class="nav-link active fw-bold text-primary" data-bs-toggle="tab" data-bs-target="#aba-get" type="button">GET (Consultar)</button>
+                    </li>
+                    <!-- Item da lista referente ao método POST -->
+                    <li class="nav-item" role="presentation">
+                        <!-- Botão que ativa a seção POST na tela -->
+                        <button class="nav-link fw-bold text-success" data-bs-toggle="tab" data-bs-target="#aba-post" type="button">POST (Cadastrar)</button>
+                    </li>
+                    <!-- Item da lista referente ao método PUT -->
+                    <li class="nav-item" role="presentation">
+                        <!-- Botão que ativa a seção PUT na tela -->
+                        <button class="nav-link fw-bold text-warning" data-bs-toggle="tab" data-bs-target="#aba-put" type="button">PUT (Substituir)</button>
+                    </li>
+                    <!-- Item da lista referente ao método PATCH -->
+                    <li class="nav-item" role="presentation">
+                        <!-- Botão que ativa a seção PATCH na tela -->
+                        <button class="nav-link fw-bold text-secondary" data-bs-toggle="tab" data-bs-target="#aba-patch" type="button">PATCH (Estoque)</button>
+                    </li>
+                    <!-- Item da lista referente ao método DELETE -->
+                    <li class="nav-item" role="presentation">
+                        <!-- Botão que ativa a seção DELETE na tela -->
+                        <button class="nav-link fw-bold text-danger" data-bs-toggle="tab" data-bs-target="#aba-delete" type="button">DELETE (Excluir)</button>
+                    </li>
+                <!-- Fecha a lista de navegação -->
+                </ul>
+            <!-- Fecha a tag de navegação -->
+            </nav>
+        <!-- Fecha o container do cabeçalho -->
+        </div>
+    <!-- Fecha o cabeçalho principal da página -->
+    </header>
+
+    <!-- Tag semântica MAIN: Define a área onde o conteúdo principal e dinâmico da página reside -->
+    <main class="container mb-5 flex-grow-1">
+        
+        <!-- Divisão que armazena todas as seções dinâmicas (Abas) da nossa Single Page Application -->
+        <div class="tab-content mb-4">
+
+            <!-- ========================================================== -->
+            <!-- ABA 1: SPRINT 1 - MÉTODO GET (Listagem e Busca no MySQL)   -->
+            <!-- ========================================================== -->
+            <!-- Tag SECTION semântica para agrupar o conteúdo do módulo GET -->
+            <section class="tab-pane fade show active" id="aba-get" role="tabpanel">
+                <!-- Tag ARTICLE semântica, representando um bloco de conteúdo independente (o Cartão GET) -->
+                <article class="card shadow-sm border-primary border-top-0 rounded-bottom">
+                    <!-- Corpo do cartão Bootstrap -->
+                    <div class="card-body">
+                        <!-- Formulário responsável por disparar a busca -->
+                        <form id="formGet" class="row g-3 align-items-end">
+                            <!-- Coluna para o campo de filtro (Query Parameter) -->
+                            <div class="col-md-8">
+                                <!-- Tag LABEL semântica, associada ao input pelo atributo "for" -->
+                                <label for="getCategoria" class="form-label">Filtrar por Categoria (ds_categoria - Opcional)</label>
+                                <!-- Campo de texto para o usuário digitar a categoria -->
+                                <input type="text" class="form-control" id="getCategoria" placeholder="Ex: Perifericos">
+                            </div>
+                            <!-- Coluna para o botão de envio -->
+                            <div class="col-md-4">
+                                <!-- Botão de submit que aciona a requisição HTTP GET -->
+                                <button type="submit" class="btn btn-primary w-100 fw-bold">Consultar MySQL (GET)</button>
+                            </div>
+                        <!-- Fecha o formulário GET -->
+                        </form>
+                    <!-- Fecha o corpo do cartão -->
+                    </div>
+                <!-- Fecha o bloco do artigo -->
+                </article>
+            <!-- Fecha a seção da Aba GET -->
+            </section>
+
+            <!-- ========================================================== -->
+            <!-- ABA 2: SPRINT 2 - MÉTODO POST (Criação de Novo Produto)    -->
+            <!-- ========================================================== -->
+            <!-- Tag SECTION semântica para o módulo POST -->
+            <section class="tab-pane fade" id="aba-post" role="tabpanel">
+                <!-- Bloco do artigo independente (Cartão POST) -->
+                <article class="card shadow-sm border-success border-top-0 rounded-bottom">
+                    <div class="card-body">
+                        <!-- Formulário responsável pela criação de registros -->
+                        <form id="formPost" class="row g-3">
+                            <!-- Campo para o Código SKU -->
+                            <div class="col-md-3">
+                                <label for="postSku" class="form-label">SKU (cd_sku) *</label>
+                                <!-- Input marcado como required (obrigatório) para validação nativa do HTML -->
+                                <input type="text" class="form-control" id="postSku" placeholder="Ex: MON-001" required>
+                            </div>
+                            <!-- Campo para o Nome do Produto -->
+                            <div class="col-md-3">
+                                <label for="postNome" class="form-label">Nome (nm_produto) *</label>
+                                <input type="text" class="form-control" id="postNome" required>
+                            </div>
+                            <!-- Campo para a Categoria -->
+                            <div class="col-md-2">
+                                <label for="postCategoria" class="form-label">Categoria (ds_categoria) *</label>
+                                <input type="text" class="form-control" id="postCategoria" required>
+                            </div>
+                            <!-- Campo para o Valor/Preço -->
+                            <div class="col-md-2">
+                                <label for="postPreco" class="form-label">Preço (vl_preco) *</label>
+                                <!-- step="0.01" permite que o HTML aceite números decimais (centavos) -->
+                                <input type="number" step="0.01" class="form-control" id="postPreco" required>
+                            </div>
+                            <!-- Campo para a Quantidade de Estoque -->
+                            <div class="col-md-2">
+                                <label for="postEstoque" class="form-label">Estoque (qt_estoque)</label>
+                                <!-- Valor inicial padrão (0) -->
+                                <input type="number" class="form-control" id="postEstoque" value="0">
+                            </div>
+                            <!-- Coluna de largura total para o botão -->
+                            <div class="col-12 mt-4">
+                                <!-- Botão de submit que aciona a requisição HTTP POST -->
+                                <button type="submit" class="btn btn-success w-100 fw-bold">Gravar no MySQL (POST)</button>
+                            </div>
+                        <!-- Fecha o formulário POST -->
+                        </form>
+                    </div>
+                </article>
+            </section>
+
+            <!-- ========================================================== -->
+            <!-- ABA 3: SPRINT 3 - MÉTODO PUT (Sobrescrita Total do Dado)   -->
+            <!-- ========================================================== -->
+            <!-- Tag SECTION semântica para o módulo PUT -->
+            <section class="tab-pane fade" id="aba-put" role="tabpanel">
+                <article class="card shadow-sm border-warning border-top-0 rounded-bottom">
+                    <div class="card-body">
+                        <!-- Formulário 1 (Passo 1): Responsável apenas por buscar os dados do ID informado -->
+                        <form id="formPutBusca" class="row g-3 align-items-end mb-3 pb-3 border-bottom">
+                            <div class="col-md-6">
+                                <label for="putId" class="form-label">1º Passo: Informe o id_produto para carregar</label>
+                                <input type="number" class="form-control fw-bold" id="putId" placeholder="Ex: 1" required>
+                            </div>
+                            <div class="col-md-6">
+                                <!-- Botão que aciona uma busca GET prévia -->
+                                <button type="submit" class="btn btn-dark w-100">Buscar Registro (GET)</button>
+                            </div>
+                        </form>
+
+                        <!-- Formulário 2 (Passo 2): Exibe os campos para edição total. Inicia oculto (classe d-none) -->
+                        <form id="formPutSalvar" class="row g-3 d-none">
+                            <!-- Aviso para o aluno sobre a regra de negócio do PUT -->
+                            <h6 class="text-secondary fw-bold mb-3">2º Passo: O método PUT exige o reenvio de todos os atributos.</h6>
+                            <!-- Todos os inputs abaixo são obrigatórios (required) para garantir a sobrescrita total -->
+                            <div class="col-md-3">
+                                <label for="putSku" class="form-label">SKU (cd_sku) *</label>
+                                <input type="text" class="form-control" id="putSku" required>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="putNome" class="form-label">Nome (nm_produto) *</label>
+                                <input type="text" class="form-control" id="putNome" required>
+                            </div>
+                            <div class="col-md-2">
+                                <label for="putCategoria" class="form-label">Categoria (ds_categoria) *</label>
+                                <input type="text" class="form-control" id="putCategoria" required>
+                            </div>
+                            <div class="col-md-2">
+                                <label for="putPreco" class="form-label">Preço (vl_preco) *</label>
+                                <input type="number" step="0.01" class="form-control" id="putPreco" required>
+                            </div>
+                            <div class="col-md-2">
+                                <label for="putEstoque" class="form-label">Estoque (qt_estoque) *</label>
+                                <input type="number" class="form-control" id="putEstoque" required>
+                            </div>
+                            <div class="col-12 mt-4">
+                                <!-- Botão de submit que aciona a requisição HTTP PUT com pacote completo -->
+                                <button type="submit" class="btn btn-warning w-100 fw-bold">Executar Sobrescrita Completa (PUT)</button>
+                            </div>
+                        <!-- Fecha o formulário de salvamento PUT -->
+                        </form>
+                    </div>
+                </article>
+            </section>
+
+            <!-- ========================================================== -->
+            <!-- ABA 4: SPRINT 4 - MÉTODO PATCH (Atualização Cirúrgica)     -->
+            <!-- ========================================================== -->
+            <!-- Tag SECTION semântica para o módulo PATCH -->
+            <section class="tab-pane fade" id="aba-patch" role="tabpanel">
+                <article class="card shadow-sm border-secondary border-top-0 rounded-bottom">
+                    <div class="card-body">
+                        <!-- Formulário 1 (Passo 1): Busca o estoque atual do produto no MySQL -->
+                        <form id="formPatchBusca" class="row g-3 align-items-end mb-3 pb-3 border-bottom">
+                            <div class="col-md-6">
+                                <label for="patchId" class="form-label">1º Passo: Informe o id_produto</label>
+                                <input type="number" class="form-control fw-bold" id="patchId" placeholder="Ex: 1" required>
+                            </div>
+                            <div class="col-md-6">
+                                <!-- Botão de busca -->
+                                <button type="submit" class="btn btn-dark w-100">Carregar qt_estoque Atual (GET)</button>
+                            </div>
+                        </form>
+
+                        <!-- Formulário 2 (Passo 2): Exibe apenas o campo alvo do remendo cirúrgico. Inicia oculto. -->
+                        <form id="formPatchSalvar" class="row g-3 align-items-end d-none">
+                            <div class="col-md-8">
+                                <label for="patchEstoque" class="form-label">2º Passo: Digite o novo valor para qt_estoque *</label>
+                                <input type="number" class="form-control" id="patchEstoque" required>
+                            </div>
+                            <div class="col-md-4">
+                                <!-- Botão de submit que enviará uma carga mínima na requisição HTTP PATCH -->
+                                <button type="submit" class="btn btn-secondary w-100 fw-bold">Atualizar Coluna (PATCH)</button>
+                            </div>
+                        </form>
+                    </div>
+                </article>
+            </section>
+
+            <!-- ========================================================== -->
+            <!-- ABA 5: SPRINT 5 - MÉTODO DELETE (Exclusão Física)          -->
+            <!-- ========================================================== -->
+            <!-- Tag SECTION semântica para o módulo DELETE -->
+            <section class="tab-pane fade" id="aba-delete" role="tabpanel">
+                <article class="card shadow-sm border-danger border-top-0 rounded-bottom">
+                    <div class="card-body">
+                        <!-- Formulário responsável por enviar a ordem de exclusão -->
+                        <form id="formDelete" class="row g-3 align-items-end">
+                            <div class="col-md-8">
+                                <!-- Etiqueta instruindo o envio apenas da ID (O DELETE não usa Body JSON) -->
+                                <label for="deleteId" class="form-label">Informe o id_produto a ser excluído do MySQL *</label>
+                                <input type="number" class="form-control" id="deleteId" placeholder="Ex: 2" required>
+                            </div>
+                            <div class="col-md-4">
+                                <!-- Botão que acionará o método HTTP DELETE -->
+                                <button type="submit" class="btn btn-danger w-100 fw-bold">Excluir Registro (DELETE)</button>
+                            </div>
+                        </form>
+                    </div>
+                </article>
+            </section>
+
+        <!-- Fecha o container das abas dinâmicas -->
+        </div>
+
+        <!-- ============================================================== -->
+        <!-- TERMINAL COMPARTILHADO: Visor Fixo para os Retornos da API     -->
+        <!-- ============================================================== -->
+        <!-- Tag SECTION semântica para agrupar a área de resposta visual -->
+        <section class="card shadow-sm">
+            <!-- HEADER do cartão, contendo o título do terminal -->
+            <header class="card-header bg-dark text-white fw-bold d-flex justify-content-between align-items-center">
+                <span>📦 Resposta da API (JSON retornado pelo Node.js)</span>
+                <!-- Pequeno selo avisando que é uma área técnica de sistema -->
+                <span class="badge bg-secondary">Terminal do Navegador</span>
+            </header>
+            <!-- Corpo do terminal com fundo escuro e cantos arredondados -->
+            <div class="card-body bg-dark p-0 rounded-bottom">
+                <!-- Tag PRE semântica (Texto pré-formatado). Preserva as quebras de linha e espaços do JSON -->
+                <pre id="visorJson" class="json-viewer text-info p-3 m-0">Aguardando disparo de operação HTTP acima...</pre>
+            </div>
+        </section>
+
+    <!-- Fecha a tag MAIN principal da página -->
+    </main>
+
+    <!-- Importa o arquivo JavaScript oficial do Bootstrap 5 para animações e alternância das abas -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Importa o nosso script local contendo a lógica de comunicação (Fetch API) -->
+    <script src="/js/script.js"></script>
+<!-- Fecha a tag body e encerra a estrutura do HTML -->
+</body>
+</html>
