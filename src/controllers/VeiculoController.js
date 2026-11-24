@@ -1,5 +1,5 @@
 const VeiculoModel = require('../models/VeiculoModel');
-const VeiculoView = require('./VeiculoView');
+const VeiculoView = require('../views/VeiculoView');
 
 class VeiculoController {
   static async listar(req, res) {
