@@ -1,46 +1,55 @@
-/* ========================================================================== */
-/* ARQUIVO CSS CUSTOMIZADO (public/css/style.css): Estilo Moderno e Limpo     */
-/* ========================================================================== */
-
-/* Estilo base global aplicado a todo o corpo da página */
+/* Seleciona o elemento raiz body para aplicar a tipografia padrão da interface */
 body {
-    /* Utiliza as fontes nativas, limpas e modernas do sistema operacional do aluno */
+    /* Define a pilha de fontes nativas modernas do sistema operacional */
     font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-}
+} /* Fecha a regra do body */
 
-/* Configura a janela escura <pre> que simula um terminal de código para a resposta da API */
-.json-viewer {
-    /* Utiliza fonte monoespaçada nativa (igual ao VS Code) para que o JSON fique alinhado perfeitamente */
-    font-family: "Courier New", Courier, monospace;
-    /* Define um tamanho de letra confortável para a leitura técnica */
-    font-size: 0.9rem;
-    /* Define uma altura mínima para evitar que o painel colapse ou fique feio quando vazio */
-    min-height: 160px;
-    /* Define limite máximo de altura. Se o pacote JSON for gigante, não explodirá a tela */
-    max-height: 380px;
-    /* Ativa automaticamente a barra de rolagem vertical apenas se o conteúdo passar do max-height */
-    overflow-y: auto;
-    /* Aplica transição animada de cor. Se a API devolver erro, o painel piscará em vermelho suavemente */
-    transition: background-color 0.3s ease, color 0.3s ease;
-    /* Regra importantíssima: Quebra linhas longas automaticamente para não gerar rolagem horizontal chata */
-    white-space: pre-wrap;
-}
+/* Seleciona as abas inativas no cabeçalho escuro para melhorar o contraste */
+.nav-tabs .nav-link {
+    /* Define um fundo levemente translúcido para as abas não selecionadas */
+    background-color: rgba(255, 255, 255, 0.08);
+    /* Adiciona um pequeno espaçamento lateral entre as abas */
+    margin-right: 4px;
+    /* Suaviza a transição de cores ao passar o mouse */
+    transition: background-color 0.2s ease;
+} /* Fecha a regra das abas inativas */
 
-/* Modificação no padrão do Bootstrap para as abas ativas */
+/* Aplica destaque visual ao passar o mouse sobre uma aba inativa */
+.nav-tabs .nav-link:hover {
+    /* Clareia ligeiramente o fundo da aba sob o cursor */
+    background-color: rgba(255, 255, 255, 0.16);
+} /* Fecha a regra de hover das abas */
+
+/* Seleciona a aba atualmente ativa no Bootstrap */
 .nav-tabs .nav-link.active {
-    /* Oculta a linha inferior da aba ativa, criando um efeito visual de que ela faz parte do cartão abaixo */
-    border-bottom-color: transparent !important;
-    /* Pinta o fundo da aba de branco, mesclando com o cartão de formulário */
+    /* Aplica fundo branco sólido para fundir visualmente a aba com o cartão abaixo */
     background-color: #ffffff;
-}
+    /* Remove a borda inferior da aba ativa */
+    border-bottom-color: transparent;
+} /* Fecha a regra da aba ativa */
 
-/* Adiciona um respiro visual (letter-spacing) aos títulos dos cartões */
-.card-header {
-    letter-spacing: 0.5px;
-}
-
-/* Utilitário auxiliar: remove a borda arredondada superior dos cartões vinculados a abas (encaixe perfeito) */
+/* Ajusta os cartões conectados diretamente abaixo das abas */
 .border-top-0 {
+    /* Remove o arredondamento do canto superior esquerdo */
     border-top-left-radius: 0;
+    /* Remove o arredondamento do canto superior direito */
     border-top-right-radius: 0;
-}
+} /* Fecha a regra de borda superior */
+
+/* Estiliza o elemento pre que exibe o retorno JSON da API */
+.json-viewer {
+    /* Aplica fonte monoespaçada para alinhar chaves e valores JSON */
+    font-family: "Consolas", "Courier New", monospace;
+    /* Define o tamanho confortável de leitura para código */
+    font-size: 0.9rem;
+    /* Garante altura mínima para o visor não colapsar quando vazio */
+    min-height: 170px;
+    /* Limita a altura máxima para evitar que listas longas estiquem toda a página */
+    max-height: 420px;
+    /* Ativa barra de rolagem vertical apenas quando o conteúdo ultrapassar 420px */
+    overflow-y: auto;
+    /* Quebra textos extensos automaticamente evitando rolagem horizontal */
+    white-space: pre-wrap;
+    /* Suaviza a mudança visual entre respostas de sucesso (2xx) e erro (4xx/5xx) */
+    transition: color 0.25s ease, background-color 0.25s ease;
+} /* Fecha a regra do visor JSON */
