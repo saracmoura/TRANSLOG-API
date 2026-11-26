@@ -22,4 +22,20 @@ const validarHeadersJson = (req, res, next) => {
     next();
 };
 
+function exigirJson(req,res, next){
+    if(req.method === 'POST') {
+        const contentType = req.headers['content-type'] || '';
+
+        const tipos = contentType.split(';')[0].trim().toLowerCase();
+
+        if(tipos !== 'application/json') {
+            return res.status(415).json({
+                erro: 'Unsupported Media Type',
+                mensagem: '[ERRO] Formato não suportado. Envie o cabeçalho Content-Type: [application/json]'
+            });
+        }
+    }
+    next();
+}
+
 module.exports = { validarHeadersJson, verificarToken };
