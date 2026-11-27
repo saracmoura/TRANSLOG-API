@@ -14,12 +14,24 @@ const validarHeadersJson = (req, res, next) => {
     next();
 };
 
-    const verificarToken = (req, res, next) => {
+const verificarToken = (req, res, next) => {
     const authHeader = req.headers["authorization"] || "";
     if (authHeader !== `Bearer ${process.env.API_TOKEN}`) {
-        return res.status (401).json({ Status: "Erro 401 (Unauthorized)", mensagem: "Acesso negado: Bearer Token Inválido."});
+        return res.status(401).json({ Status: "Erro 401 (Unauthorized)", mensagem: "Acesso negado: Bearer Token Inválido." });
     }
     next();
 };
 
-module.exports = { validarHeadersJson, verificarToken };
+function exigirJson(req, res, next) {
+        const contentType = req.headers['content-type'] || '';
+        const tipos = contentType.split(';')[0].trim().toLowerCase();
+        if (tipos !== 'application/json') {
+            return res.status(415).json({
+                erro: 'Unsupported Media Type',
+                mensagem: 'Para requisições POST, o cabeçalho Content-Type deve ser application/json.'
+            });
+        }
+    }
+    next();
+
+module.exports = { validarHeadersJson, verificarToken, exigirJson };
